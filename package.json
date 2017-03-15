@@ -1,0 +1,25 @@
+{
+  "name": "explore",
+  "version": "1.0.0",
+  "description": "student web project ",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.15.2",
+    "flickrapi": "^0.6.0",
+    "node-flickr": "^1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adrirosa/Explore.git"
+  },
+  "author": "adrirosa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adrirosa/Explore/issues"
+  },
+  "homepage": "https://github.com/adrirosa/Explore#readme"
+}
