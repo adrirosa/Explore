@@ -7,6 +7,7 @@ According to you preferences and location the app will give you a plan or route 
 
 # Ressources
 
- - Flickr API or Instagram API
- - Google maps API but may be sufficient
+ - Flickr API with node-flickr package
+ - Google maps API 
  - NodeJS, ExpressJS
+

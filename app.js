@@ -1,16 +1,41 @@
 var Flickr = require("node-flickr");
+var express = require('express');
+var http = require('http');
+
+//parameters for flickr API
 var key = {"api_key" : "209ad645579753faddda52110765128b" };
-
 var flickr = new Flickr(key);
-
-
 var apiURL = 'https://api.flickr.com/services/api/';
 
-//Get the photo by tags
-flickr.get("photos.search", {"tags":"flowers,yellow"}, function(err,result){
-	if (err) return console.error(err);
-	console.log(result.photos);
+//set the app
+app.set('port', process.env.PORT || 3000);
+
+http.createServer( function (req, res){
+	res.writeHead(200);
+	res.end();
 });
+
+//show the index page by default on the port 3000
+app.get('/',function(req, res){
+	res.sendFile(__dirname + './index.html');
+	res.render('index');
+});
+
+app.post('/post', function(req,res){
+	//will bring the parameters location, tags, preferences for the research
+	//call the function to search
+	//function to create the itineraire
+});
+
+
+//Get the photo by tags
+function tagSearch(tag){
+	flickr.get("photos.search", {"tags":tag}, function(err,result){
+		if (err) return console.error(err);
+		console.log(result.photos);
+	});
+	return 0;
+};
 
 //Try to get photos by GeoData proprieties true
 flickr.get("photos.getWithGeoData", {"privacy_filter": 1}, function(err,result){
