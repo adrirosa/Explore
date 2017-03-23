@@ -6,6 +6,8 @@ var http = require('http');
 var key = {"api_key" : "209ad645579753faddda52110765128b" };
 var flickr = new Flickr(key);
 var apiURL = 'https://api.flickr.com/services/api/';
+var tag = "";
+var location = "";
 
 //set the app
 app.set('port', process.env.PORT || 3000);
@@ -23,6 +25,9 @@ app.get('/',function(req, res){
 
 app.post('/post', function(req,res){
 	//will bring the parameters location, tags, preferences for the research
+	tag = req.body.tag;
+	location = req.body.location;
+
 	//call the function to search
 	//function to create the itineraire
 });
@@ -38,7 +43,7 @@ function tagSearch(tag){
 };
 
 //Try to get photos by GeoData proprieties true
-flickr.get("photos.getWithGeoData", {"privacy_filter": 1}, function(err,result){
+flickr.get("photos.geo.getLocation", {"photo_id" : photo_id}, function(err,result){
 	if (err) return console.error(err);
 	console.log(result);
 });
