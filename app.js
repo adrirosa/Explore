@@ -10,9 +10,11 @@ var flickr = new Flickr(key);
 var apiURL = 'https://api.flickr.com/services/api/';
 var tag = " ";
 var location = " ";
+var geo = "";
 
 //set the app
 app.set('port', process.env.PORT || 3000);
+app.use(bodyParser.urlencoded({ extended: false }));
 
 http.createServer( function (req, res){
 	res.writeHead(200);
@@ -29,22 +31,24 @@ app.post('/post', function(req,res){
 	//will bring the parameters location, tags, preferences for the research
 	tag = req.body.tag;
 	location = req.body.location;
-
 	console.log(tag+" "+location);
-	//call the function to search
 
+	//call the function to search
+	var resultSearch = tagSearch(tag);
+	for(var i = 0; i< resultSearch.lenght ; i++){
+		geo = getGeo(resultSearch[i].id);
+	};
 
 
 	/**function to create the itineraire
 	 *Needs google api
 	 */
+
+	 res.send('index');
 });
-var resultGeo = getGeo(31930880093);
-var resultSearch = tagSearch("car");
 
-
-//var resultSearch = tagSearch('river');
-//console.log(resultSearch);
+//var resultSearch = tagSearch("car");
+//var resultGeo = getGeo(31930880093);
 
 //Get the photo by tags
 function tagSearch(tag){
@@ -59,19 +63,10 @@ function tagSearch(tag){
 
 	flickr.get("photos.search", {"tags":tag, "has_geo":1}, function(err,result){
 		if (err) return console.error(err);
-		resultTag = {
-		"photos": { 
-			"page":result.photos.page,
-			"pages":result.photos.pages,
-			"perpage": result.photos.perpage, 
-			"total": result.photos.total,
-			"photo" : [
-				{"id": result.photos.photo.id, "owner": result.photos.photo.owner , "title":result.photos.photo.title}
-			]},
-		"stat" : result.stat
-	};
-		//need to fix the [object object] in the list
-		console.log(resultTag);
+		//console.log(result);
+		resultTag = result.photos.photo;
+
+		//console.log(JSON.stringify(resultTag, null, 2));
 	});
 	return resultTag;
 };
@@ -108,8 +103,7 @@ function getGeo(photo_id){
 			"stat" : result.stat
 		}
 	};
-		//need to fix the locality, return [object object]
-		console.log(resultGeo);
+		console.log(JSON.stringify(resultGeo, null, 2));
 	});
 	return resultGeo;
 };
