@@ -12,6 +12,9 @@ var tag = " ";
 var location = " ";
 var geo = "";
 
+//parameters google maps api
+var key = "AIzaSyBetfCXVVKo1iRZvq3vwmbVpLiReLpbm4A";
+
 //set the app
 app.set('port', process.env.PORT || 3000);
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -28,6 +31,7 @@ app.get('/',function(req, res){
 });
 
 app.post('/post', function(req,res){
+	initMap();
 	//will bring the parameters location, tags, preferences for the research
 	tag = req.body.tag;
 	location = req.body.location;
@@ -44,7 +48,8 @@ app.post('/post', function(req,res){
 	 *Needs google api
 	 */
 
-	 res.send('index');
+	 res.render('views/index.html');
+	 res.send(geo);
 });
 
 //var resultSearch = tagSearch("car");
@@ -107,6 +112,16 @@ function getGeo(photo_id){
 	});
 	return resultGeo;
 };
+
+//function to initialize the maps
+var map;
+function initMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: -34.397, lng: 150.644},
+    zoom: 8
+  });
+}
+
 
 console.log("port 3000 listening");
 app.listen(3000);

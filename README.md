@@ -11,3 +11,10 @@ According to you preferences and location the app will give you a plan or route 
  - Google maps API 
  - NodeJS, ExpressJS
 
+#Description
+
+Explore is a web application which will generate an itineraire for your photo trip.
+Enter the theme of your journey (ex: urban, garden, architecture...) and the city to discover.
+Then Epxplore will search in flickr database to sort the photos which correspond to your theme.
+Then it will get the location in each photos and thanks to google maps api, create an itineraire.
+Now just go, explore and shot !
